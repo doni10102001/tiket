@@ -1,0 +1,158 @@
+header{
+    background: url('/img/fly.jpg');
+    background-size: cover;
+    height: 650px;
+}
+
+.bg-main{
+    color: #abcfba;
+    font-family: sans-serif;
+    font-style: italic;
+}
+
+.display-3{
+    position: relative;
+    z-index: 6px;
+    font-family: verdana;
+    font-weight: bold; 
+}
+
+.display-4{
+    /*color: #4aaddb;*/
+    color: #fff;
+    background-color: rgba(0,0,0,0.3);
+    font-family: sans-serif;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+#navbar1{
+    /*opacity: 0.8;*/
+    background: rgba(0,0,0,0.9);
+}
+
+#navbar2{
+    background: rgba(0,0,0,0.3); 
+}
+
+/* Home Wrapper (Halaman User) */
+.page-user{
+    background: url('/img/airline.jpg');
+    background-size: cover;
+    height: 520px;
+}
+
+#head .col-sm-4{
+  position: relative;
+  top: 70%;
+  background: rgba(0, 0, 0,0.8);
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* Image Overlay Hover */
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: rgba(0,0,0,0.6); /*#008CBA;*/
+}
+
+.col-md-4:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Input */
+#form .col-md-6{
+  margin-top: 8%;
+  color: #fff;
+  background-color: #9fa3a1; /*rgba(0,0,0,0.8);*//*#918a8a;*/
+  border-radius: 5px;
+  display:block;
+  outline: none;
+   -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+#form>div .form-group:last-child{
+  display:inline-block;
+  width:100%;
+}
+
+.row{
+  width: 100%;
+}
+
+/* Form - 2 */
+#form-2 .col-sm-5 {
+  margin: 0;
+  background:  #fafafa; /*#84b5a6;#d1ca83;rgba(0,0,0,0.8);*/
+  border-radius: 8px;
+  border-color: 2px solid #000;
+  box-shadow: 0 0.5rem 1rem #9fa3a1;
+  color: #000;
+  font-size: 16px;
+ padding-bottom: 12px;
+}
+
+/* Form - 3 */
+#form-2 .col-sm-4{
+  margin: 0;
+  background: /*#d1ca83;*/#fafafa;
+  border-radius: 8px;
+  border-color: 1px solid;
+  box-shadow: 0 0.5rem 1rem  #9fa3a1;
+  color: #000;
+  font-size: 16px;
+  padding-bottom: 12px;
+}
+/* Tiket Saya */
+#kartu{
+  width: 250px;
+}
+
+#kartu .caption{
+  font-size: 15px;
+}
+
+/* Reservation */
+#form-3 .col-md-6{
+  margin: 0;
+  background: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 0.5rem 1rem  #9fa3a1
+}
+
+#form-3 .col-md-5{
+  margin-left: 20px;
+}
+
+/* Footer */
+footer{
+  position: relative;
+  margin-top: 15%;
+  background: #343A40; 
+  color: #fff;
+}
