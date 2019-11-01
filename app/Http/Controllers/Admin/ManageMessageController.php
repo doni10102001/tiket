@@ -10,14 +10,19 @@ class ManageMessageController extends Controller
 {
     public function index()
     {
-    	return view('admin.message.index');
+        $date = date('Y-n-d');
+        $message = Message::Where('date', '=', $date)->count();
+        $pesan = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
+    	return view('admin.message.index', compact('message', 'pesan'));
     }
 
     public function ManageMessageDatatables()
     {
     	$message = Message::all();
     	return Datatables::of($message)
-						   ->addColumn('action', 'admin.message.action')->make(true);
+						   ->addColumn('action', 'admin.message.action')
+                           ->addIndexColumn()
+                           ->make(true);
     }
 
     public function delete($id)

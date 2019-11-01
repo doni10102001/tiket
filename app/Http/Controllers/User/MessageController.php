@@ -15,6 +15,7 @@ class MessageController extends Controller
         $message = new Message;
         $message->email = $request->email;
         $message->message = $request->message;
+        $message->date = date('Y-n-d');
         $message->save();
 
         Alert::success('Terkirim', 'Success');

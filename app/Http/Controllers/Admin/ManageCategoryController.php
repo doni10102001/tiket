@@ -4,13 +4,18 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use App\Message;
+use App\Notification;
 use Yajra\Datatables\Datatables;
 
 class ManageCategoryController extends Controller
 {
 	 public function index()
     {
-    	return view('admin.category.index');
+    	$date = date('Y-n-d');
+    	$message = Message::Where('date', '=', $date)->count();
+        $pesan = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
+    	return view('admin.category.index', compact('message', 'pesan'));
     }
     
 	public function CategoryDatatables()
@@ -18,27 +23,38 @@ class ManageCategoryController extends Controller
 		$category = Category::all();
 
 		return Datatables::of($category)
-						   ->addColumn('action', 'admin.category.action')->make(true);
+						   ->addColumn('action', 'admin.category.action')
+						   ->addIndexColumn()
+						   ->make(true);
 
 	}
 
 	public function CategoryCreate()
 	{
-		return view('admin.category.add');
+		$date    = date('Y-n-d');
+        $message = Message::Where('date', '=', $date)->count();
+        $pesan   = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
+		return view('admin.category.add', compact('message', 'pesan'));
 	}
 
 	public function CategoryEdit($id)
 	{
+		$date    = date('Y-n-d');
+        $message = Message::Where('date', '=', $date)->count();
+        $pesan   = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
 		$category = Category::findOrFail($id);
 		$show = false;
-		return view('admin.category.edit', ['category' => $category, 'show' => $show]);
+		return view('admin.category.edit', compact('category', 'show', 'message', 'pesan'));
 	}
 
 	public function CategoryShow($id)
 	{
+		$date    = date('Y-n-d');
+	    $message = Message::Where('date', '=', $date)->count();
+	    $pesan   = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
 		$category = Category::findOrFail($id);
 		$show = true;
-		return view('admin.category.edit', ['category' => $category, 'show' => $show]);
+		return view('admin.category.edit', compact('category', 'show', 'message', 'pesan'));
 	}
 
 	public function store(Request $request)

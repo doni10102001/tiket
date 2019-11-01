@@ -7,6 +7,7 @@ use Yajra\Datatables\Datatables;
 use App\Maskapai;
 use App\Category;
 use App\Tickets;
+use App\Message;
 use Alert;
 use Image;
 
@@ -14,7 +15,10 @@ class ManageTicketsController extends Controller
 {
     public function index()
     {
-    	return view('admin.ticket.index');
+        $date    = date('Y-n-d');
+        $message = Message::Where('date', '=', $date)->count();
+        $pesan   = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
+    	return view('admin.ticket.index', compact('message', 'pesan'));
     }
 
     public function ManageTicketDatatables()
@@ -22,48 +26,45 @@ class ManageTicketsController extends Controller
     	$ticket = Tickets::select('id','kode_tkt', 'source', 'destination', 'price', 'stock', 'takeoff_date')->get();
     	return Datatables::of($ticket)
     					   ->addColumn('action', 'admin.ticket.action')
+                           ->addIndexColumn()
     					   ->editColumn('price', function(Tickets $ticket){
     					   	 	return "IDR ".str_replace(".", ".", number_format($ticket->price));
-    					   })->make(true);
+    					   })
+                           ->make(true);
     }
 
     public function TicketCreate()
     {
-    	$category = Category::all();
-    	$maskapai = Maskapai::all();
-    	return view('admin.ticket.add',['category' => $category, 'maskapai' => $maskapai]);
+        $date       = date('Y-n-d');
+        $message    = Message::Where('date', '=', $date)->count();
+        $pesan      = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
+    	$category   = Category::all();
+    	$maskapai   = Maskapai::all();
+    	return view('admin.ticket.add', compact('category', 'maskapai', 'message', 'pesan'));
     }
 
     public function TicketShow($id)
     {
-        $ticket = Tickets::findOrFail($id);
-        $category = Category::all();
-        $maskapai = Maskapai::all();
-        $show = true;
-        return view('admin.ticket.edit',
-            [
-                'ticket'   => $ticket,
-                'show'     => $show,
-                'category' => $category,
-                'maskapai' => $maskapai,
-            ]
-        );
+        $date       = date('Y-n-d');
+        $message    = Message::Where('date', '=', $date)->count();
+        $pesan      = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
+        $ticket     = Tickets::findOrFail($id);
+        $category   = Category::all();
+        $maskapai   = Maskapai::all();
+        $show       = true;
+        return view('admin.ticket.edit', compact('ticket', 'show', 'category', 'maskapai', 'message', 'pesan'));
     }
 
     public function TicketEdit($id)
     {
+        $date = date('Y-n-d');
+        $message = Message::Where('date', '=', $date)->count();
+        $pesan = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
         $ticket = Tickets::findOrFail($id);
         $category = Category::all();
         $maskapai = Maskapai::all();
         $show = false;
-        return view('admin.ticket.edit',
-            [
-                'ticket'   => $ticket,
-                'show'     => $show,
-                'category' => $category,
-                'maskapai' => $maskapai,
-            ]
-        );
+        return view('admin.ticket.edit', compact('ticket', 'show', 'category', 'maskapai', 'message', 'pesan'));
     }
 
     public function store(Request $request)

@@ -13,7 +13,9 @@ Tiket Saya
     </div>
     <div class="card-body">
         @foreach($notification as $a )
-        <p>{{$a->description}}</p>
+        <pre>
+        	{{$a->description}}
+        </pre>
         @endforeach
     </div>
 </div>

@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
 use App\User;
 use App\Reservation;
 use App\Category;
 use App\Tickets;
 use App\Maskapai;
-use Alert;
 use App\Admin;
+use App\Message;
+use App\Notification;
+use Auth;
+use Alert;
 
 class AdminController extends Controller
 {
@@ -21,20 +23,15 @@ class AdminController extends Controller
 
     public function index()
     {
+        $date = date('Y-n-d');
     	$user   = User::count();
     	$category = Category::count();
         $maskapai = Maskapai::count();
     	$ticket = Tickets::count();
         $reservation  = Reservation::count();
-    	return view('admin.admin',
-    	[
-            'user'   => $user,
-            'category' => $category,
-            'maskapai' => $maskapai,
-            'ticket' => $ticket,
-            'reservation'  => $reservation,
-        ]
-    	);
+        $message = Message::Where('date', '=', $date)->count();
+        $pesan = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
+    	return view('admin.admin', compact('user', 'category', 'maskapai', 'ticket', 'reservation', 'message', 'pesan'));
     }
 
     public function show($id)

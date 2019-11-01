@@ -5,30 +5,42 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Datatables;
 use App\Notification;
+use App\Message;
 
 class ManageNotificationController extends Controller
 {
    public function index()
    {
- 		return view('admin.notification.index');
+      $date = date('Y-n-d');
+      $message = Message::Where('date', '=', $date)->count();
+      $pesan = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
+ 		return view('admin.notification.index', compact('message', 'pesan'));
    }
 
    public function infoDatatables()
    {
    	$notification = Notification::all();
     	return Datatables::of($notification)
-    					->addColumn('action','admin.notification.action')->make(true);
+    					->addColumn('action','admin.notification.action')
+              ->addIndexColumn()
+              ->make(true);
    }
 
    public function create()
    {
-   		return view('admin.notification.add');
+      $date = date('Y-n-d');
+      $message = Message::Where('date', '=', $date)->count();
+      $pesan = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
+   		return view('admin.notification.add', compact('message', 'pesan'));
    }
 
    public function edit($id)
    {
+      $date = date('Y-n-d');
+      $message = Message::Where('date', '=', $date)->count();
+      $pesan = Message::Where('date', '=', $date)->orderBy('id', 'desc')->get();
    		$notification = Notification::findOrFail($id);
-   		return view('admin.notification.edit', ['notification' => $notification]);
+   		return view('admin.notification.edit', compact('notification', 'message', 'pesan'));
    }
 
    public function store(Request $request)

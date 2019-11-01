@@ -1,27 +1,45 @@
 @extends('layouts.layout-admin')
-@section('judul')
-Pengaturan Ticket
+@section('title')
+  Tiket Online | Admin - Data Reservasi Tiket
 @stop
 @section('content')
-<div class="container mt-5">
-	<div class="col-sm-8">
-		<i class="fa fa-ticket"></i> Pengaturan Ticket
-			<table class="table table-striped table-bordered dt-responsive nowrap" id="reservation-manage" border="1">
-				<tr>
-					<thead>
-						<th>Id</th>
-						<th>Kode Transaksi</th>
-						<th>Nama</th>
-						<th>Email</th>
-						<th>Phone</th>
-						<th>Total Tiket</th>
-						<th>Total Harga</th>
-						<th>Tgl Booking</th>
-						<th>Aksi</th>
-					</thead>
-				</tr>
-			</table>
-	</div>
+<div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-users"></i>
+          <span>Data Reservation</span></h6>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Dropdown Header:</div>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+        <br>
+        <table class="table table-striped table-bordered" id="reservation-manage">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Kode Transaksi</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Total Tiket</th>
+                    <th>Total Harga</th>
+                    <th>Tgl Booking</th>  
+                    <th>Opsi</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
 @stop
 @push('scripts')
